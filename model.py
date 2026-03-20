@@ -9,16 +9,12 @@
 
 from datetime import datetime
 
-class Status:
-    status = ["todo", "in progress", "done"]
-
 class TodoItem:
-    def __init__(self, id: int, description: str, status: Status, created_at: datetime, updated_at: datetime):
-        self.id = id
-        self.description = description
-        self.status = status
-        self.created_at = created_at
-        self.updated_at = updated_at
-
-    def __repr__(self):
-        return {"id": self.id, "description": self.description, "status": self.status, "created_at": self.created_at, "updated_at": self.updated_at}
+    def __new__(cls, id: int, description: str, status: str, created_at: str = str(datetime.now()), updated_at: str = str(datetime.now())):
+        return {
+            "id": id,
+            "description" : description,
+            "status" : status,
+            "created_at" : created_at,
+            "updated_at" : updated_at
+        }

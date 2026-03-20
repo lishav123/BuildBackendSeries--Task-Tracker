@@ -1,31 +1,40 @@
 import os
 import json
+import functools
 
 def file_tool(filename):
+    def wrapped(func):
 
-    file_exists = os.path.exists(filename)
+        @functools.wraps(func)
+        def inner_function(*args, **kwargs):
+            file_exists = os.path.exists(filename)
+            data = []
 
-    def inner_function(*args, **kwargs):
+            if not file_exists:
+                with open(filename, "w") as f:
+                    json.dump([], f)
 
-        commands = kwargs['commands']
-        model = kwargs['model']
+            with open(filename, "r") as f:
+                try:
+                    data = json.load(f)
+                except json.JSONDecodeError:
+                    data = []
 
-        if not file_exists:
+            kwargs['data'] = data
+            res = func(*args, **kwargs)
+
+            data = res if res is not None else data
+            kwargs['data'] = data
+
             with open(filename, "w") as f:
-                json.dump(commands, f)
+                json.dump(kwargs["data"], f, indent=4)
 
-        with open(filename, "r") as f:
-            data = json.load(f)
+        return inner_function
+    return wrapped
 
-        if commands == "add":
-            with open(filename, "w") as f:
-                json.dump(data, f)
-
-        print(data)
-
-    return inner_function
 
 if __name__ == '__main__':
-    inner_tool = file_tool("./commands.json")
-    inner_tool(commands="add", model="model")
-
+    @file_tool("command.json")
+    def add(data):
+        print(data)
+        return []
