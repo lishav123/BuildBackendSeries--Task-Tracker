@@ -89,7 +89,7 @@ class Commands:
         if filter_status_by is None:
             print(tabulate(data, headers="keys", tablefmt="outline"))
 
-        if filter_status_by in ["todo", "pending", "done"]:
+        if filter_status_by in ["todo", "progress", "done"]:
             print(tabulate(list(filter(lambda item: item["status"] == filter_status_by, data)), headers="keys", tablefmt="outline"))
 
 if __name__ == "__main__":

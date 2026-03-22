@@ -9,16 +9,29 @@ from commands import Commands
 # - List all tasks that are not done
 # - List all tasks that are in progress
 
-commands = ["add", "list", "delete", "update"]
+commands = ["add", "list", "delete", "update", "mark-in-progress", "mark-done"]
 
 if argv[1] == "add":
     Commands.add(description=argv[2])
 
 if argv[1] == "list":
-    Commands.list()
+    if len(argv) == 3:
+        if argv[2] in ["progress", "done", "todo"]:
+            Commands.list(filter_status_by=argv[2])
+    else:
+        Commands.list()
 
 if argv[1] == "delete":
     Commands.delete(id=int(argv[2]))
 
 if argv[1] == "update":
     Commands.update_description(id=int(argv[2]), description=argv[3])
+
+if argv[1] == "mark-in-progress":
+    Commands.update_status(id=int(argv[2]), status="progress")
+
+if argv[1] == "mark-done":
+    Commands.update_status(id=int(argv[2]), status="done")
+
+if argv[1] not in commands:
+    print("Unknown command: use help command for more info!")
