@@ -8,8 +8,8 @@
 
 from datetime import datetime
 
-from tools import file_tool
-from model import TodoItem
+from task_tracker.tools import file_tool
+from task_tracker.model import TodoItem
 
 from tabulate import tabulate # used only for good table structure
 
@@ -19,10 +19,15 @@ class Commands:
     @file_tool("tracker-app.json")
     def add(data: list | dict, description: str):
         """
-        usage: tracker-app add <description>
+        usage: task-tracker add <description>
         - Will add your task in your tracker
+
+        example:
+        $ task-tracker add "Add Item"
+        Item added used `task-tracker list` to see your tasks.
         """
         if isinstance(data, list):
+            print("Item added used `task-tracker list` to see your tasks.")
             if not len(data) > 0:
                 data += [TodoItem(id=0, description=description, status="todo")]
             else:
@@ -36,8 +41,12 @@ class Commands:
     @file_tool("tracker-app.json")
     def update_description(data: dict | list, id: int, description: str):
         """
-        usage: tracker-app update <id> <description>
+        usage: task-tracker update <id> <description>
         - Will update your task in your tracker
+
+        example:
+        $ task-tracker update 0 "New Item"
+        updated the description of id `0` to `new Item` successfully.
         """
         return list(
             map(

@@ -1,2 +1,5 @@
-command.json
+task_tracker/command.json
+task_tracker/tracker-app.json
+task_tracker.egg-info
+build
 tracker-app.json
