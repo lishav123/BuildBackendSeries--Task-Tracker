@@ -36,5 +36,6 @@ def file_tool(filename):
 if __name__ == '__main__':
     @file_tool("command.json")
     def add(data):
-        print(data)
-        return []
+        return {"Hello": "Helloww World"}
+
+    add()

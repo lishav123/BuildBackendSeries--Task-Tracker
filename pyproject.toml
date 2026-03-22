@@ -4,5 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.12"
 dependencies = [
+    "pandas>=3.0.1",
+    "tabulate>=0.10.0",
     "uvicorn>=0.42.0",
 ]
