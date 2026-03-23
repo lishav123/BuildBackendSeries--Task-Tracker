@@ -1,12 +1,12 @@
-﻿Task Tracker CLI
+﻿# Task Tracker CLI
 
-Project Link: https://roadmap.sh/projects/task-tracker
+## Project Link: https://roadmap.sh/projects/task-tracker
 
 A simple, local command-line interface (CLI) application to manage your daily tasks right from your terminal. Keep track of your to-dos, update their progress, and filter your lists without any distractions.
 
 Everything is saved securely in a local JSON file (tracker-app.json). This project was built as part of the roadmap.sh backend developer track.
 
-✨ Features
+## ✨ Features
 
 - Add new tasks to your list.
 - Update the description of existing tasks.
@@ -14,12 +14,12 @@ Everything is saved securely in a local JSON file (tracker-app.json). This proje
 - Track Status by marking tasks as todo, progress, or done.
 - Filter & List your tasks cleanly in a formatted table (powered by tabulate).
 
-🛠️ Prerequisites
+## 🛠️ Prerequisites
 
 - Python 3.12 or higher
 - uv (An extremely fast Python package and project manager)
 
-🚀 Installation
+## 🚀 Installation
 
 This project is packaged using a modern `pyproject.toml` configuration. Since you are using , you can easily install it locally as an isolated, system-wide command-line tool.
 
@@ -33,7 +33,7 @@ uv tool install .
 
 This will automatically install the tabulate dependency and register the task-tracker command globally on your system.
 
-💻 Usage
+## 💻 Usage
 
 Once installed, you can use the task-tracker command from anywhere in your terminal.
 
@@ -85,7 +85,7 @@ If you ever forget a command or need a syntax refresher, just use the help comma
 task-tracker help
 ```
 
-📂 Project Structure
+## 📂 Project Structure
 
 `main.py`: The entry point that parses terminal arguments (sys.argv) and routes them to the correct commands.
 
@@ -97,6 +97,6 @@ task-tracker help
 
 `help.py`: Stores the documentation and help menus.
 
-👨‍💻 Author
+## 👨‍💻 Author
 
-Lishav Tiwari (Aishwaray)
+**Lishav Tiwari (Aishwaray)**
