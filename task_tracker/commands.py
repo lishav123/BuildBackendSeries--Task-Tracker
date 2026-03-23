@@ -48,32 +48,50 @@ class Commands:
         $ task-tracker update 0 "New Item"
         updated the description of id `0` to `new Item` successfully.
         """
-        return list(
-            map(
-                lambda item: TodoItem(
-                    id = item["id"],
-                    description = description,
-                    status = item["status"],
-                    created_at = item["created_at"],
-                    updated_at = str(datetime.now())
-                ) if item["id"] == id else item, data
-            )
-        )
+        if data is None:
+            print("Nothing added anything yet to display!")
+
+        else:
+            dt = list(filter(lambda item: item["id"] == id, data))
+            if len(dt) == 0:
+                print("ID ain't available")
+            else:
+                print(f"Item updated successfully!")
+                return list(
+                    map(
+                        lambda item: TodoItem(
+                            id=item["id"],
+                            description=description,
+                            status=item["status"],
+                            created_at=item["created_at"],
+                            updated_at=str(datetime.now())
+                        ) if item["id"] == id else item, data
+                    )
+                )
 
     @staticmethod
     @file_tool("tracker-app.json")
     def update_status(data: dict | list, id: int, status: str):
-        return list(
-            map(
-                lambda item: TodoItem(
-                    id=item["id"],
-                    description=item["description"],
-                    status=status,
-                    created_at=item["created_at"],
-                    updated_at=str(datetime.now())
-                ) if item["id"] == id else item, data
-            )
-        )
+        if data is None:
+            print("Nothing added anything yet to display!")
+
+        else:
+            dt = list(filter(lambda item: item["id"] == id, data))
+            if len(dt) == 0:
+                print("ID ain't available")
+            else:
+                print(f"status: {status} updated successfully!")
+                return list(
+                    map(
+                        lambda item: TodoItem(
+                            id=item["id"],
+                            description=item["description"],
+                            status=status,
+                            created_at=item["created_at"],
+                            updated_at=str(datetime.now())
+                        ) if item["id"] == id else item, data
+                    )
+                )
 
     @staticmethod
     @file_tool("tracker-app.json")
@@ -85,6 +103,7 @@ class Commands:
         new_data = list(filter(lambda item: item["id"] != id, data))
         if len(new_data) == len(data):
             print("ID ain't available")
+        print(f"Id: {id} successfully deleted!")
         return new_data
 
     @staticmethod
@@ -94,6 +113,8 @@ class Commands:
         usage: tracker-app list <status>
         - Will list your task in your tracker
         """
+        if data is None:
+            print("Nothing added anything yet to display!")
 
         if filter_status_by is None:
             print(tabulate(data, headers="keys", tablefmt="outline"))
